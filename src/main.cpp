@@ -2,13 +2,27 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <random>
+
 // function called on window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-}  
+}
+
+void process_input(GLFWwindow* window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
+
 
 int main (int argc, char* argv[]) {
+
+    std::mt19937 rand;
+    std::uniform_int_distribution<int> distribution(0, 2);
+
+    // init opengl
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -41,6 +55,15 @@ int main (int argc, char* argv[]) {
     // finished window initialization
     // main event loop
     while (!glfwWindowShouldClose(window)) {
+        process_input(window);
+        float RED = 0;
+        float GREEN = 0;
+        float BLUE = 0;
+        glClearColor(RED, GREEN, BLUE, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        int randInt = distribution(rand);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
