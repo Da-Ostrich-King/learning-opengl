@@ -44,5 +44,7 @@ int main (int argc, char* argv[]) {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    // cleanly dispose of resources
+    glfwTerminate();
     return 0;
 }
