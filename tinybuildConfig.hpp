@@ -20,7 +20,8 @@ const BuildConfig configs[] = {
             {// binary 1
                 .bin="bin",
                 .srcdirs={"src"}, // every file in the srcdirs that matches "*.<EXTENSTION>" will be compiled together
-                .CCFLAGS=""
+                .CCFLAGS="-lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl",
+                .explicitSrcFiles={"src/glad.c"}
             }
         },
         .MAKEBUILDDIR=true
